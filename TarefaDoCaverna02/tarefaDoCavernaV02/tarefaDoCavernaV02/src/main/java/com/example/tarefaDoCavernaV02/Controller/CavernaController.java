@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.tarefaDoCavernaV02.Models.dto.OCCMultipleResponseDTO;
 import com.example.tarefaDoCavernaV02.Models.dto.OCCResponseDTO;
 import com.example.tarefaDoCavernaV02.Service.CavernaService;
 
@@ -32,9 +33,9 @@ public class CavernaController {
 	}
 	
 	@GetMapping("/occ")
-	public ResponseEntity<Map<String,Object>> findTen(){
+	public ResponseEntity<OCCMultipleResponseDTO> findTen(){
 		log.debug("findTen() - start");
-		Map<String,Object> response = cavernaService.findTen(); 
+		OCCMultipleResponseDTO response = cavernaService.findTen(); 
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	

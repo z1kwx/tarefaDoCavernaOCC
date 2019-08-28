@@ -14,7 +14,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.tarefaDoCavernaV02.Feign.OCCFeignClient;
+import com.example.tarefaDoCavernaV02.Models.dto.OCCMultipleResponseDTO;
 import com.example.tarefaDoCavernaV02.Models.dto.OCCResponseDTO;
+import com.example.tarefaDoCavernaV02.Models.dto.TokenResponseDTO;
 import com.example.tarefaDoCavernaV02.domain.Time;
 import com.example.tarefaDoCavernaV02.domain.Token;
 
@@ -45,7 +47,7 @@ public class CavernaService {
 		return newResponse;
 	}
 	
-	public Map<String,Object> findTen() {
+	public OCCMultipleResponseDTO findTen() {
 		log.debug("findTen() - start ");
 		
 		if(shouldLogin()) {
@@ -54,9 +56,9 @@ public class CavernaService {
 
 		Integer limit = 10;
 		log.warn("FeignClient - start - method - getTen(String token, Integer limit) - params: {} {}", token.getToken(), limit);
-		ResponseEntity<Map<String, Object>> response = occFeignClient.getTen(token.getToken(), limit);
+		OCCMultipleResponseDTO response = occFeignClient.getTen(token.getToken(), limit);
 			
-		return response.getBody();
+		return response;
 	}
 	
 	protected Boolean shouldLogin() {
@@ -86,12 +88,11 @@ public class CavernaService {
 		String token = "Bearer ".concat("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYTc0NTc3MS02OTNkLTQxODUtOWM1OC05ODJhNTU0YzczOTgiLCJpc3MiOiJhcHBsaWNhdGlvbkF1dGgiLCJleHAiOjE1OTgwMTg5NDksImlhdCI6MTU2NjQ4Mjk0OX0=.zePYV3XnRPEFpsAgoeibgWVMGXUqHAcE9tU10Y4oRN8=");
 
 		try {
-			log.warn("FeignClient - start - method - login(String token, MultiValueMap<String, String> bodyRequest - params: {} {})",token,bodyRequest);
-			ResponseEntity<Map<String, Object>> login = occFeignClient.login(token, bodyRequest);
+			log.warn("FeignClient - start - method - login(String token, MultiValueMap<String, String> bodyRequest - params: {} {})", token, bodyRequest);
+			TokenResponseDTO login = occFeignClient.login(token, bodyRequest);
 
-			Map<String, Object> response = login.getBody();
 
-			return "Bearer ".concat((String) response.get("access_token"));
+			return "Bearer ".concat(login.getAccess_token());
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.CONFLICT, e.getLocalizedMessage());
 		}

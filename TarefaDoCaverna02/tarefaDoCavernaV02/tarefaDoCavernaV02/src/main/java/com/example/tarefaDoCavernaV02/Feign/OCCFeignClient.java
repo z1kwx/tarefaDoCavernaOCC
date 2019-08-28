@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.tarefaDoCavernaV02.Models.dto.OCCMultipleResponseDTO;
 import com.example.tarefaDoCavernaV02.Models.dto.OCCResponseDTO;
+import com.example.tarefaDoCavernaV02.Models.dto.TokenResponseDTO;
 
 import feign.Headers;
 
@@ -27,13 +29,13 @@ public interface OCCFeignClient {
 	
 	@GetMapping(value = "/ccadmin/v1/orders", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@Headers("Content-Type: application/json")
-	ResponseEntity<Map<String, Object>> getTen(@RequestHeader("Authorization") String acessToken,
+	OCCMultipleResponseDTO getTen(@RequestHeader("Authorization") String acessToken,
 											   @RequestParam ("limit") Integer limit);
 	
 	
 	@PostMapping(value = "/ccadmin/v1/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	@Headers("Content-Type: application/x-www-form-urlencoded")
-	ResponseEntity<Map<String, Object>> login(@RequestHeader("Authorization") String token,
+	TokenResponseDTO login(@RequestHeader("Authorization") String token,
 			@RequestBody MultiValueMap<String, String> body);
 	
 }
