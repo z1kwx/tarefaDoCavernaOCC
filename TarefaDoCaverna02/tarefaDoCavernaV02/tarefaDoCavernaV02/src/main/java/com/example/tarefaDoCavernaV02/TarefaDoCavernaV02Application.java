@@ -1,30 +1,21 @@
 package com.example.tarefaDoCavernaV02;
 
-import java.util.Date;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-
-import com.example.tarefaDoCavernaV02.Service.CavernaService;
-import com.example.tarefaDoCavernaV02.domain.Time;
-import com.example.tarefaDoCavernaV02.domain.Token;
 
 @SpringBootApplication
 @EnableFeignClients
 public class TarefaDoCavernaV02Application {
 
-	@Autowired
-	private CavernaService service;
-	
-	@Autowired
-	private Token token;
-	
-	@Autowired
-	private Time time;
+//	@Autowired
+//	private CavernaService service;
+//	
+//	@Autowired
+//	private Token token;
+//	
+//	@Autowired
+//	private Time time;
 	
 //	@PostConstruct
 //	public void init() {
