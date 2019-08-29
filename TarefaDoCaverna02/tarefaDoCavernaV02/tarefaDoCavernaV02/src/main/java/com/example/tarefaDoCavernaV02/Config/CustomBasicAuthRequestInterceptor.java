@@ -9,7 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import com.example.tarefaDoCavernaV02.domain.Apikey;
+import com.example.tarefaDoCavernaV02.domain.Token;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -17,7 +17,7 @@ import feign.RequestTemplate;
 public class CustomBasicAuthRequestInterceptor implements RequestInterceptor {
 
 	@Autowired
-	private Apikey apikey;
+	private Token token;
 	
 	
 	@Override
@@ -25,7 +25,7 @@ public class CustomBasicAuthRequestInterceptor implements RequestInterceptor {
 		
 		Map<String, Collection<String>> headers = new LinkedHashMap<>();
 		headers.put("content-type", new ArrayList<String>(Arrays.asList(MediaType.APPLICATION_JSON_UTF8_VALUE)));
-		headers.put("Authorization", new ArrayList<String>(Arrays.asList(apikey.getApikey())));
+		headers.put("Authorization", new ArrayList<String>(Arrays.asList(token.getToken())));
 		
 		template.headers(headers);
 	}

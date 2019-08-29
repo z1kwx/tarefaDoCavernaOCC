@@ -46,8 +46,8 @@ public class CavernaService {
 //		Map<String, String> headers = new HashMap<>();
 //		headers.put("Content-Type", "application/json");
 		
-		log.warn("FeignClient - start - method - getOneByID(String id, String token) - params: {} {}", id, token.getToken());
-		OCCResponseDTO newResponse = occFeignClient.getOneByID(id, token.getToken());
+		log.warn("FeignClient - start - method - getOneByID(String id, String token) - params: {}", id);
+		OCCResponseDTO newResponse = occFeignClient.getOneByID(id);
 		
 		return newResponse;
 	}
@@ -60,8 +60,8 @@ public class CavernaService {
 		}
 
 		Integer limit = 10;
-		log.warn("FeignClient - start - method - getTen(String token, Integer limit) - params: {} {}", token.getToken(), limit);
-		OCCMultipleResponseDTO response = occFeignClient.getTen(token.getToken(), limit);
+		log.warn("FeignClient - start - method - getTen(String token, Integer limit) - params: {}", limit);
+		OCCMultipleResponseDTO response = occFeignClient.getTen(limit);
 			
 		return response;
 	}

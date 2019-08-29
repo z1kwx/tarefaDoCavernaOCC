@@ -7,7 +7,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 public class TarefaDoCavernaV02Application {
-
+ 
+	
 //	@Autowired
 //	private CavernaService service;
 //	
